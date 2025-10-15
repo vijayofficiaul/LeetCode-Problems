@@ -2,12 +2,6 @@
 // Link: https://leetcode.com/problems/pascals-triangle/description/?envType=problem-list-v2&envId=vmgzc3ut
 // Approach: Using Collections - 2D - ArrayList
 
-## 🧠 Example Format
-```python
-# Problem: Two Sum
-# Link: https://leetcode.com/problems/two-sum/
-# Approach: Using Hash Map for quick lookup
-```
 
 import java.util.ArrayList;
 import java.util.List;
