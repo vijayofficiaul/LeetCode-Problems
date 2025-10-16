@@ -1,0 +1,32 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        List<Integer> list = new ArrayList<>();
+        int maxProfits2 = 0;
+
+        int[] rightMax = new int[prices.length];
+        rightMax[prices.length - 1] = prices[prices.length - 1];
+        for (int i = prices.length - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(prices[i], rightMax[i + 1]);
+        }
+
+        for(int i = 0; i < prices.length - 1; i++) {
+            int min = prices[i];
+            int max = rightMax[i + 1]; 
+            
+            if(max > min){
+                list.add(max - min);
+            }
+        }
+
+        if(list.size() != 0){
+            maxProfits2 = list.get(0);
+            for(int l = 0; l < list.size(); l++){
+                if(maxProfits2 < list.get(l)){
+                    maxProfits2 = list.get(l);
+                }
+            }
+        }
+
+        return maxProfits2;
+    }
+}
