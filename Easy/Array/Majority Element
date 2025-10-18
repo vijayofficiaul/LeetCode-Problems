@@ -1,0 +1,36 @@
+// Problem 118: Pascal's Triangle
+// Link: https://leetcode.com/problems/pascals-triangle/description/?envType=problem-list-v2&envId=vmgzc3ut
+// Approach: Using Collections - 2D - ArrayList
+
+class Solution {
+    public int majorityElement(int[] nums) {
+ for (int i = 0; i < nums.length - 1; i++) {
+            boolean swapped = false; 
+            for (int j = 0; j < nums.length - i - 1; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+        }
+
+        int count = 0;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i])) {
+                count++;
+            } else {
+                set.add(nums[i]);
+                count = 1;
+            }
+            if (count > nums.length / 2) {
+                return nums[i];
+            }
+        }
+
+        return 0;
+    }
+}
