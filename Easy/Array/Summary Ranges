@@ -1,0 +1,49 @@
+// Problem 228. Summary Ranges
+// Link: https://leetcode.com/problems/summary-ranges?envType=problem-list-v2&envId=vmgzc3ut
+
+
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+                List<String> list = new ArrayList<>();
+
+
+        int i=0;
+        int j=0;
+        int temp = 0;
+        while(i <= nums.length-1){
+
+            if(i == nums.length-1){
+                j = i;
+
+                if(temp == j){
+                    list.add( nums[temp]+"");
+                }else{
+                    list.add( nums[temp] + "->" + nums[j]);
+                }
+                break;
+            }
+
+            if(nums[i] +1 == nums[i+1]){
+                j = i;
+                
+                
+            }
+
+            else{
+                j = i;
+                if(temp == j){
+                    list.add( nums[temp]+"");
+                }else{
+                    list.add( nums[temp] + "->" + nums[j]);
+                }
+                
+                
+                temp = i+1;
+            }
+            
+            i++;
+
+        }
+        return list;
+    }
+}
