@@ -1,0 +1,37 @@
+// Problem 414. Third Maximum Number
+// Link: https://leetcode.com/problems/third-maximum-number?envType=problem-list-v2&envId=vmgzc3ut
+
+class Solution {
+    public int thirdMax(int[] nums) {
+                Set<Integer> set = new LinkedHashSet<>();
+        for(int i=0; i<nums.length; i++){
+            for(int j=0; j<nums.length-i-1; j++){
+                if(nums[j] > nums[j+1]){
+                    int temp = nums[j];
+                    nums[j] = nums[j+1];
+                    nums[j+1] = temp;
+                }
+            }
+            set.add(nums[nums.length-i-1]);
+        }
+
+        Integer result = 0;
+        int i = 0;
+        if(set.size() >=3){
+            Iterator<Integer> it = set.iterator();
+            while (it.hasNext() && i<3) {
+                result = it.next();
+                i++;
+            }
+
+        }else{
+            int j = 0;
+            Iterator<Integer> it = set.iterator();
+            while (it.hasNext() && j<1) {
+                result = it.next();
+                j++;
+            }
+        }
+        return result;            
+    }
+}
