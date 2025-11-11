@@ -1,0 +1,143 @@
+// Problem 242. Valid Anagram
+// Link: https://leetcode.com/problems/valid-anagram
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        if(s.length() != t.length()) return false;
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        int count = 1;
+        for(int i=0; i<s.length(); i++){
+            if(map.containsKey(s.charAt(i))){
+                map.put(s.charAt(i), map.get(s.charAt(i))+1);
+            }else{
+                map.put(s.charAt(i), count);
+            }
+        }
+
+
+        for(int i=0; i<t.length(); i++){
+
+            if(!map.containsKey(t.charAt(i))) return false;
+
+            if(map.containsKey(t.charAt(i))){
+                map.put(t.charAt(i), map.get(t.charAt(i))-1);
+            }
+            if(map.get(t.charAt(i)) < 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------
+
+You are given two strings s and t.
+You must check if t is an anagram of s.
+👉 An anagram means both strings contain the same characters with the same frequency, just in a different order.
+
+💡 Hash Map Logic (Step-by-Step)
+
+We’ll use a hash map (dictionary) to count how many times each character appears in one string, then subtract those counts using the other string.
+
+Example
+
+Let’s take:
+
+s = "anagram"
+t = "nagaram"
+
+Step 1: Check lengths
+
+If the lengths are not equal, they can’t be anagrams.
+
+len(s) = 7, len(t) = 7  ✅ continue
+
+Step 2: Count frequency of each char in s
+
+We build a hash map where:
+
+key = character
+
+value = count (how many times it appears)
+
+Character	Count
+a	3
+n	1
+g	1
+r	1
+m	1
+
+So, after processing "anagram", our map looks like:
+
+count = { 'a': 3, 'n': 1, 'g': 1, 'r': 1, 'm': 1 }
+
+Step 3: Decrease counts using characters from t
+
+Now we loop through "nagaram" (string t).
+
+Each time we see a character:
+
+If the character doesn’t exist in the map → return False.
+
+Otherwise, subtract 1 from its count.
+
+If any count goes below zero, it means t has that character too many times → return False.
+
+Let’s simulate:
+
+Step	Character	Action	Map After
+1	n	n → 1-1=0	{'a':3,'n':0,'g':1,'r':1,'m':1}
+2	a	a → 3-1=2	{'a':2,'n':0,'g':1,'r':1,'m':1}
+3	g	g → 1-1=0	{'a':2,'n':0,'g':0,'r':1,'m':1}
+4	a	a → 2-1=1	{'a':1,'n':0,'g':0,'r':1,'m':1}
+5	r	r → 1-1=0	{'a':1,'n':0,'g':0,'r':0,'m':1}
+6	a	a → 1-1=0	{'a':0,'n':0,'g':0,'r':0,'m':1}
+7	m	m → 1-1=0	{'a':0,'n':0,'g':0,'r':0,'m':0}
+Step 4: Verify all counts are zero
+
+At the end:
+
+{'a':0,'n':0,'g':0,'r':0,'m':0}
+
+
+✅ All counts are 0 → t used exactly the same letters as s.
+
+👉 Therefore, "nagaram" is an anagram of "anagram".
+
+❌ Example that Fails
+s = "rat"
+t = "car"
+
+Step 1
+
+Lengths are equal → continue.
+
+Step 2: Count s
+{'r':1, 'a':1, 't':1}
+
+Step 3: Subtract t
+
+c → not in map ❌ → return False immediately.
+
+So "car" is not an anagram of "rat".
+
+⏱️ Complexity
+Operation	Time	Space
+Build map	O(n)	O(k)
+Subtract using t	O(n)	—
+Total	O(n)	O(k) (distinct characters)
+
+Would you like me to show this same explanation visually (as a diagram of how counts change per character)?
+That helps a lot for intuition.
+
+*/;
