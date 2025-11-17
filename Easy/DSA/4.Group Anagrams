@@ -1,0 +1,35 @@
+// Problem 49: Group Anagrams
+// Link: https://leetcode.com/problems/group-anagrams
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+         HashMap<String, List<String>> map = new HashMap<>();
+
+        for (String word : strs) {
+            String sorted = sortString(word);
+
+            if (!map.containsKey(sorted)) {
+                map.put(sorted, new ArrayList<>());
+            }
+            map.get(sorted).add(word);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    private String sortString(String s) {
+        char[] arr = s.toCharArray();
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    char temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        return new String(arr);
+    } 
+}
