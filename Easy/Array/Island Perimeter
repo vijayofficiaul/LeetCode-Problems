@@ -1,0 +1,35 @@
+// Problem 463. Island Perimeter
+// Link: https://leetcode.com/problems/island-perimeter?envType=problem-list-v2&envId=vmgzc3ut
+
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int perimeter = 0;
+        
+        int i=0;
+        int j=0;
+
+
+        while(i<grid.length && j<grid[i].length){
+
+            if(grid[i][j] == 1){
+                perimeter += 4;
+
+                if (i + 1 < grid.length && grid[i + 1][j] == 1) {
+                    perimeter -= 2;
+                }
+                if (j + 1 < grid[i].length && grid[i][j + 1] == 1) {
+                    perimeter -= 2;
+                }
+            }
+
+            j++;
+            if(j == grid[i].length){
+                i++;
+                j=0;
+            }
+
+        }
+
+        return perimeter;
+    }
+}
